@@ -4,34 +4,32 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git 'https://ваш-git-репозиторій.git'
+                git 'https://github.com/Rew1ndy/TestJenkins.git'
             }
         }
 
-        stage('Setup Environment') {
+        stage('Install Dependencies') {
             steps {
-                sh 'sudo apt-get install renpy -y'  // Встановлення Ren'Py
-                sh 'pip install pytest pytest-junitxml'
+                bat 'pip install -r requirements.txt'
             }
         }
 
         stage('Run Syntax Check') {
             steps {
-                sh 'renpy check game/'
+                bat 'renpy check game/'
             }
         }
 
-        stage('Run Unit Tests') {
+        stage('Run Tests') {
             steps {
-                sh 'pytest --junitxml=reports/unit.xml tests/test_jumps.py'
-                sh 'pytest --junitxml=reports/ui.xml tests/test_ui.py'
+                bat 'pytest --junitxml=reports/unit.xml tests/test_jumps.py'
+                bat 'pytest --junitxml=reports/ui.xml tests/test_ui.py'
             }
         }
 
-        stage('Generate Report') {
+        stage('Publish Results') {
             steps {
                 junit 'reports/*.xml'
-                sh 'echo "Тестування завершено. Перевірте звіт у Jenkins"'
             }
         }
     }
@@ -39,8 +37,8 @@ pipeline {
     post {
         failure {
             mail to: 'ваш-email@example.com',
-                 subject: "Помилка у тестуванні гри",
-                 body: "Деякі тести не пройшли. Деталі: ${env.BUILD_URL}"
+                 subject: 'Помилка тестування',
+                 body: "Деталі: ${env.BUILD_URL}"
         }
     }
 }
