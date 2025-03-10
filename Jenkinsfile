@@ -10,14 +10,19 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                // Варіант 1: Вказати повний шлях до Python (якщо не в PATH)
-                bat 'C:\\Users\\Rezi\\AppData\\Local\\Programs\\Python\\Python313\\python.exe -m pip install pytest renpy'
+                bat 'C:\\Users\\Rezi\\AppData\\Local\\Programs\\Python\\Python313\\python.exe -m pip install pytest'
+            }
+        }
+
+        stage('Install RenPy') {
+            steps {
+                bat 'choco install renpy -y'  // Встановлення Ren'Py
             }
         }
 
         stage('Run Syntax Check') {
             steps {
-                bat 'C:\\Users\\Rezi\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\renpy.exe renpy check C:\\Users\\Rezi\\Desktop\\TestsSelenium_shmalko\\game'
+                bat '"C:\\ProgramData\\chocolatey\\lib\\renpy\\tools\\renpy.exe" check game/'
             }
         }
 
@@ -37,9 +42,7 @@ pipeline {
 
     post {
         failure {
-            mail to: 'ваш-email@example.com',
-                 subject: 'Помилка тестування',
-                 body: "Деталі: ${env.BUILD_URL}"
+            echo 'Build failed. Check logs for details.'  // Тимчасово відключіть email
         }
     }
 }
