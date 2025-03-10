@@ -5,29 +5,27 @@ pipeline {
         stage('Checkout') {
             steps {
                 git branch: 'main', url: 'https://github.com/Rew1ndy/TestJenkins.git'
+                // Проверяем структуру репозитория
+                bat 'dir game'  // Выводим содержимое папки game
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                bat 'C:\\Users\\Rezi\\AppData\\Local\\Programs\\Python\\Python313\\python.exe -m pip install pytest renpy'
+                bat 'C:\\Users\\Rezi\\AppData\\Local\\Programs\\Python\\Python313\\python.exe -m pip install pytest'
             }
         }
 
-        stage('Run Syntax Check') {
-            steps {
-                // bat 'C:\\Users\\Rezi\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\renpy.exe check --no-renaming game/'
-                bat 'git status'  // Проверка состояния репозитория
-                bat 'type game/script.rpy'  // Проверка содержимого файла
-            }
-        }
+        // stage('Run Syntax Check') {
+        //     steps {
+        //         bat 'C:\\Users\\Rezi\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\renpy.exe check --no-renaming game/'
+        //     }
+        // }
 
         stage('Run Tests') {
             steps {
                 bat 'C:\\Users\\Rezi\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\pytest.exe --junitxml=reports/unit.xml tests/test_jumps.py'
                 bat 'C:\\Users\\Rezi\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\pytest.exe --junitxml=reports/ui.xml tests/test_ui.py'
-                // bat 'pytest --junitxml=reports/unit.xml tests/test_jumps.py'
-                // bat 'pytest --junitxml=reports/ui.xml tests/test_ui.py'
             }
         }
 
@@ -40,9 +38,7 @@ pipeline {
 
     post {
         failure {
-            mail to: 'ваш-email@example.com',
-                 subject: 'Помилка тестування',
-                 body: "Деталі: ${env.BUILD_URL}"
+            echo 'Build failed. Check logs for details.'  // Отключаем email до настройки SMTP
         }
     }
 }
