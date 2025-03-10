@@ -33,7 +33,8 @@ label start:
          jump library_scene
       "Повернутись додому":
          stop music fadeout 1.0
-   
+         jump end_scene
+
    return
    
 label library_scene:
