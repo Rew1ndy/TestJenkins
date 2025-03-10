@@ -12,9 +12,6 @@ pipeline {
             steps {
                 // Варіант 1: Вказати повний шлях до Python (якщо не в PATH)
                 bat 'C:\\Users\\Rezi\\AppData\\Local\\Programs\\Python\\Python313\\python.exe -m pip install pytest'
-
-                // Варіант 2: Використовувати requirements.txt
-                bat 'pip install -r requirements.txt'
             }
         }
 
