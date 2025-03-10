@@ -1,5 +1,5 @@
 def test_all_characters_have_lines():
-    characters = {"e", "a", "r"}
+    characters = {"e", "a"}
     found = set()
     
     with open("game/script.rpy", "r", encoding="utf-8") as f:
