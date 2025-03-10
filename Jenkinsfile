@@ -4,25 +4,19 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/Rew1ndy/TestJenkins.git'
+                git 'https://ваш-репозиторій.git'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                bat 'C:\\Users\\Rezi\\AppData\\Local\\Programs\\Python\\Python313\\python.exe -m pip install pytest'
-            }
-        }
-
-        stage('Install RenPy') {
-            steps {
-                bat 'choco install renpy -y'  // Встановлення Ren'Py
+                bat 'pip install pytest renpy'
             }
         }
 
         stage('Run Syntax Check') {
             steps {
-                bat '"C:\\ProgramData\\chocolatey\\lib\\renpy\\tools\\renpy.exe" check game/'
+                bat 'renpy check game/'
             }
         }
 
@@ -42,7 +36,9 @@ pipeline {
 
     post {
         failure {
-            echo 'Build failed. Check logs for details.'  // Тимчасово відключіть email
+            mail to: 'ваш-email@example.com',
+                 subject: 'Помилка тестування',
+                 body: "Деталі: ${env.BUILD_URL}"
         }
     }
 }
