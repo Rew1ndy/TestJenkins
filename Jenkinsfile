@@ -11,7 +11,7 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 // Варіант 1: Вказати повний шлях до Python (якщо не в PATH)
-                bat 'C:\Users\Rezi\AppData\Local\Programs\Python\Python313\python.exe -m pip install pytest pytest-junitxml'
+                bat 'C:\\Users\\Rezi\\AppData\\Local\\Programs\\Python\\Python313\\python.exe -m pip install pytest pytest-junitxml'
 
                 // Варіант 2: Використовувати requirements.txt
                 bat 'pip install -r requirements.txt'
