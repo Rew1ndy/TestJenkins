@@ -22,8 +22,10 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                bat 'pytest --junitxml=reports/unit.xml tests/test_jumps.py'
-                bat 'pytest --junitxml=reports/ui.xml tests/test_ui.py'
+                bat 'C:\\Users\\Rezi\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\pytest.exe --junitxml=reports/unit.xml tests/test_jumps.py'
+                bat 'C:\\Users\\Rezi\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\pytest.exe --junitxml=reports/ui.xml tests/test_ui.py'
+                // bat 'pytest --junitxml=reports/unit.xml tests/test_jumps.py'
+                // bat 'pytest --junitxml=reports/ui.xml tests/test_ui.py'
             }
         }
 
