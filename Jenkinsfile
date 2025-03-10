@@ -10,7 +10,7 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                bat 'pip install pytest renpy'
+                bat 'C:\\Users\\Rezi\\AppData\\Local\\Programs\\Python\\Python313\\python.exe -m pip install pytest renpy'
             }
         }
 
