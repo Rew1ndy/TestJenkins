@@ -33,16 +33,6 @@ label start:
          jump library_scene
       "Повернутись додому":
          stop music fadeout 1.0
-      #    jump end_scene
-      # "Сыграть в блэкджек":
-      #    jump blackjack
-      # "Сыграть в Игра на память":
-      #    jump MemoryGame
-      # "Сыграть в Мини-игру Вгадай номер  ":
-      #    jump guess_the_number
-      # "Сыграть в Мини-игру  ":
-      #    jump rock_paper_scissors
-
    
    return
    
