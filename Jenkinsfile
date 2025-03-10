@@ -17,7 +17,7 @@ pipeline {
 
         stage('Run Syntax Check') {
             steps {
-                bat 'C:\\Users\\Rezi\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\renpy.exe renpy check game/'
+                bat 'C:\\Users\\Rezi\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\renpy.exe renpy check C:\\Users\\Rezi\\Desktop\\TestsSelenium_shmalko\\game'
             }
         }
 
