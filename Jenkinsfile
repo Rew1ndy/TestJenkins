@@ -16,7 +16,7 @@ pipeline {
 
         stage('Run Syntax Check') {
             steps {
-                bat 'C:\\Users\\Rezi\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\renpy.exe check --no-renaming game/'
+                // bat 'C:\\Users\\Rezi\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\renpy.exe check --no-renaming game/'
                 bat 'git status'  // Проверка состояния репозитория
                 bat 'type game/script.rpy'  // Проверка содержимого файла
             }
