@@ -16,16 +16,12 @@ pipeline {
             }
         }
 
-        // stage('Run Syntax Check') {
-        //     steps {
-        //         bat 'C:\\Users\\Rezi\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\renpy.exe check --no-renaming game/'
-        //     }
-        // }
-
         stage('Run Tests') {
             steps {
                 bat 'C:\\Users\\Rezi\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\pytest.exe --junitxml=reports/unit.xml tests/test_jumps.py'
                 bat 'C:\\Users\\Rezi\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\pytest.exe --junitxml=reports/ui.xml tests/test_ui.py'
+                bat 'C:\\Users\\Rezi\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\pytest.exe --junitxml=reports/scene.xml tests/scenes_check.py'
+                bat 'C:\\Users\\Rezi\\AppData\\Local\\Programs\\Python\\Python313\\Scripts\\pytest.exe --junitxml=reports/characters.xml tests/characters_check.py'
             }
         }
 
